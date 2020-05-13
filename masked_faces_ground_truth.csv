@@ -1,4 +1,4 @@
-class,x1,y1,x2,y2,img,unknown,unknown
+class,x1,y1,w,h,img,unknown,unknown
 with_mask,549,319,253,301,0.jpg,934,1401
 with_mask,171,164,170,189,1.jpg,500,716
 with_mask,253,94,90,110,2.jpg,500,334
