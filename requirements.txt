@@ -1,1 +1,13 @@
 tensorflow==2.1.0
+keras
+numpy
+opencv-python
+PyYAML
+tqdm
+Pillow
+Cython
+ipython
+scikit-learn
+urllib3
+matplotlib
+googledrivedownloader
