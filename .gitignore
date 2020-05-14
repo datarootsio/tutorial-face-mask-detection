@@ -1,5 +1,6 @@
-test/
-data/
+data/sampled_face_images/
+data/raw/
+data/staging/
 .idea/
 
 # Byte-compiled / optimized / DLL files
