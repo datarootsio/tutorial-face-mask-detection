@@ -53,7 +53,7 @@ The pipeline also incorrectly identified 6 faces that did not match any face in 
 
 #### Evaluation of the face detector
 
-As can be seen from the table above, the face detector correctly identifies  **94%** of the images in the test set (i.e. 239 out of 254). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. Additionally, the face detector outputs 6 bounding boxes for the test set that do not correspond to faces in the ground truth.
+As can be seen from the table above, the face detector correctly identifies  **94%** of the images in the test set (i.e. 248 out of 263). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. Additionally, the face detector outputs 6 bounding boxes for the test set that do not correspond to faces in the ground truth.
 
 #### Evaluation of the mask/no mask classifier
 
