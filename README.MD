@@ -57,7 +57,7 @@ As can be seen from the table above, the face detector correctly identifies  **9
 
 #### Evaluation of the mask/no mask classifier
 
-The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops as identified by the face detector. With a classification threshold of 0.5, this results in the statistics listed in the table above. Of course, different thresholds can be used to trade off TNR and FNR. The following plot shows the ROC curve for the mask/no mask classifier.
+The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops as identified by the face detector. With a classification threshold of 0.5, this results in the statistics listed in the table above, which corresponds to an accuracy of **91%**. Of course, different thresholds can be used to trade off TNR and FNR. The following plot shows the ROC curve for the mask/no mask classifier.
 
 ![](scripts/img/roc.png "ROC curve")
 
