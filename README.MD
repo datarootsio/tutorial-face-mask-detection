@@ -19,7 +19,7 @@ The purpose of this project is ________. (Describe the main goals of the project
 
 
 ## Project Description
-(Provide more detailed overview of the project.  Talk a bit about your data sources and what questions and hypothesis you are exploring. What specific data analysis/visualization and modelling work are you using to solve the problem? What blockers and challenges are you facing?  Feel free to number or bullet point things here)
+Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building. 
 
 ### Data collection
 Give more details about datasets and where do we collect
@@ -37,25 +37,27 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 #### Overall evaluation
 
-Our test set of 135 images contains 254 faces, of which 136 are unmasked. 
+The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We consider a face to be identified if the face detector produces a bounding box with an intersection over union (IoU) > 0.5 with the ground truth bounding box corresponding to that face.
 
-128 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 94%**.\
-We consider an unmasked face to be identified correctly if the detector produces a face bounding box that has an intersection over union (IoU) > 0.5 with the ground truth bounding box for that face, and the classification model subsequently classifies the detected face as unmasked.  
+The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and second one how many times we incorrectly identify an unmasked face. 
 
-20 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 15.7%**. 
+From the table we can see that 128 of the 136 unmasked faces were identified correctly, resulting in **TNR = 94%**. 20 of the 127 masked faces were incorrectly identified as unmasked, resulting in **FNR = 15.7%**. 
 
-The pipeline incorrectly marked 5 masked faces for which there was no matching face in the ground truth. 
+
+|    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
+|----------|:-------------:|------:| ------:|------:|
+| masked |  127 |  97 | 20 | 10 |
+| unmasked |    136   |   128 | 3 | 5  |
+
+The pipeline also incorrectly identified 6 faces that did not match any face in the ground truth, 5 of them were subsequently classified as non-masked and 1 as masked.
 
 #### Evaluation of the face detector
 
-The face detector correctly identifies 94% of the ground truth faces in the test set (i.e. for 239 out of 254 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. This means that 5 out of the 8 missed unmasked faces were due to the detector. \
-The face detector also outputs 6 bounding boxes for the test set that do not correspond to faces, 5 of which were subsequently classified as masked.
+As can be seen from the table above, the face detector correctly identifies  **94%** of the images in the test set (i.e. 239 out of 254). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. Additionally, the face detector outputs 6 bounding boxes for the test set that do not correspond to faces in the ground truth.
 
 #### Evaluation of the mask/no mask classifier
 
-The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops corresponding to faces identified by the face detector. This resulted in the following confusion matrix and ROC curve. 
-
-![](scripts/img/confusion.png "confusion matrix")
+The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops as identified by the face detector. With a classification threshold of 0.5, this results in the statistics listed in the table above, which corresponds to an accuracy of **91%**. Of course, different thresholds can be used to trade off TNR and FNR. The following plot shows the ROC curve for the mask/no mask classifier.
 
 ![](scripts/img/roc.png "ROC curve")
 
