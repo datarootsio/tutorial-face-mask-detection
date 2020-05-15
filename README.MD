@@ -37,8 +37,6 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 #### Overall evaluation
 
-#### Overall evaluation
-
 The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We consider a face to be identified if the face detector produces a bounding box with an intersection over union (IoU) > 0.5 with the ground truth bounding box corresponding to that face.
 
 The two most relevant metrics are the true negative rate (TNR), as it tells us how many of the unmasked faces we detect, and the false negative rate (FNR), as it tells us how many times we incorrectly identify an unmasked face. 
