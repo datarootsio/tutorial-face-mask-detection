@@ -41,7 +41,7 @@ The following table summarizes the performance of the complete pipeline (i.e. th
 
 The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and second one how many times we incorrectly identify an unmasked face. 
 
-From the table we can see that 128 of the 136 unmasked faces were identified correctly, resulting in **TNR = 94%**. 20 of the 118 masked faces were incorrectly identified as unmasked, resulting in **FNR = 15.7%**. 
+From the table we can see that 128 of the 136 unmasked faces were identified correctly, resulting in **TNR = 94%**. 20 of the 127 masked faces were incorrectly identified as unmasked, resulting in **FNR = 15.7%**. 
 
 
 |    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
