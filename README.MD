@@ -37,7 +37,10 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 #### Overall evaluation
 
-The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We consider a face to be identified if the face detector produces a bounding box with an intersection over union (IoU) > 0.5 with the ground truth bounding box corresponding to that face.
+Our test set contains 135 images, which contain 263 faces (127 masked and 136 unmasked).  
+
+The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier).  
+We consider a face to be identified if the face detector produces a bounding box with an intersection over union (IoU) > 0.5 with the ground truth bounding box corresponding to that face.
 
 The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and second one how many times we incorrectly identify an unmasked face. 
 
@@ -46,8 +49,8 @@ From the table we can see that 128 of the 136 unmasked faces were identified cor
 
 |    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
 |----------|:-------------:|------:| ------:|------:|
-| masked |  127 |  97 | 20 | 10 |
-| unmasked |    136   |   128 | 3 | 5  |
+| masked faces |  127 |  97 | 20 | 10 |
+| unmasked faces |    136   |   128 | 3 | 5  |
 
 The pipeline also incorrectly identified 6 faces that did not match any face in the ground truth, 5 of them were subsequently classified as non-masked and 1 as masked.
 
