@@ -35,9 +35,14 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 ### Model Performance
 Face detection Performance
+
 Classification Performance
+
 Share ROC curve for Classification
+
 Share confusion matrix
+
+Cumulative performance (face detection & classification) together
 
 ## Getting Started
 Inform how to run this model on dploy.ai
