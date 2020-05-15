@@ -49,7 +49,7 @@ From the table we can see that 128 of the 136 unmasked faces were identified cor
 | masked |  127 |  97 | 20 | 10 |
 | unmasked |    136   |   128 | 3 | 5  |
 
-The pipeline also incorrectly identified 8 non-masked faces that didn't match any face in the ground truth.
+The pipeline also incorrectly identified 6 faces that did not match any face in the ground truth, 5 of them were subsequently classified as non-masked and 1 as masked.
 
 #### Evaluation of the face detector
 
