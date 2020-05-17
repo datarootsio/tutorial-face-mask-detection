@@ -4,9 +4,11 @@
 The general outline of the model
 
 
-## Project Intro/Objective
+
 The purpose of this project is ________. (Describe the main goals of the project and potential civic impact. Limit to a short paragraph, 3-6 Sentences)
 
+## General Model Workflow
+![](scripts/img/mask_detector_model_workflow.png "Model Workflow")
 
 ### Methods Used
 * Face Detection
@@ -37,14 +39,14 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 #### Overall evaluation
 
-Our test set of 135 images contains 254 faces, of which 136 are unmasked. 
+Our test set of 135 images contains 254 faces, of which 136 are unmasked.
 
 128 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 94%**.\
 We consider an unmasked face to be identified correctly if the detector produces a face bounding box that has an intersection over union (IoU) > 0.5 with the ground truth bounding box for that face, and the classification model subsequently classifies the detected face as unmasked.  
 
-20 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 15.7%**. 
+20 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 15.7%**.
 
-The pipeline incorrectly marked 5 masked faces for which there was no matching face in the ground truth. 
+The pipeline incorrectly marked 5 masked faces for which there was no matching face in the ground truth.
 
 #### Evaluation of the face detector
 
@@ -53,7 +55,7 @@ The face detector also outputs 6 bounding boxes for the test set that do not cor
 
 #### Evaluation of the mask/no mask classifier
 
-The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops corresponding to faces identified by the face detector. This resulted in the following confusion matrix and ROC curve. 
+The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops corresponding to faces identified by the face detector. This resulted in the following confusion matrix and ROC curve.
 
 ![](scripts/img/confusion.png "confusion matrix")
 
