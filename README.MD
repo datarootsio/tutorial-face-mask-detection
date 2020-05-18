@@ -41,23 +41,29 @@ Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
 
 Our test set of 135 images contains 254 faces, of which 136 are unmasked.
 
-128 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 94%**.\
-We consider an unmasked face to be identified correctly if the detector produces a face bounding box that has an intersection over union (IoU) > 0.5 with the ground truth bounding box for that face, and the classification model subsequently classifies the detected face as unmasked.  
+The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier).  
+We consider a face to be identified if the face detector produces a bounding box with an intersection over union (IoU) > 0.5 with the ground truth bounding box corresponding to that face.
 
-20 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 15.7%**.
+The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 
 
-The pipeline incorrectly marked 5 masked faces for which there was no matching face in the ground truth.
+128 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 94%**. 20 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 15.7%**.
+
+
+|    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
+|----------|:-------------:|------:| ------:|------:|
+| masked faces |  127 |  97 | 20 | 10 |
+| unmasked faces |    136   |   128 | 3 | 5  |
+
+The pipeline also incorrectly identified 6 faces that did not match any face in the ground truth, 5 of them were subsequently classified as non-masked and 1 as masked.
+
 
 #### Evaluation of the face detector
 
-The face detector correctly identifies 94% of the ground truth faces in the test set (i.e. for 239 out of 254 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. This means that 5 out of the 8 missed unmasked faces were due to the detector. \
-The face detector also outputs 6 bounding boxes for the test set that do not correspond to faces, 5 of which were subsequently classified as masked.
+The face detector correctly identifies 94% of the ground truth faces in the test set (i.e. for 239 out of 254 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 15 faces in the ground truth that it does not detect, 10 are masked and 5 are not masked. This means that 5 out of the 8 missed unmasked faces were due to the detector. The face detector also outputs 6 bounding boxes for the test set that do not correspond to faces, 5 of which were subsequently classified as masked.
 
 #### Evaluation of the mask/no mask classifier
 
-The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops corresponding to faces identified by the face detector. This resulted in the following confusion matrix and ROC curve.
-
-![](scripts/img/confusion.png "confusion matrix")
+The mask/no mask classifier was evaluated on the faces that were correctly identified by the face detector. The inputs to the classifier were the crops corresponding to faces identified by the face detector. With a classification threshold at 0.5, this resulted in the confusion matrix given in columns 3 and 4 (identified and classified correcly, and identified but classified wrongly) of the table above. Of course we can easily trade off between TNR and FNR by changing the classification threshold. The following figure shows the ROC curve for the mask/no mask classifier.
 
 ![](scripts/img/roc.png "ROC curve")
 
