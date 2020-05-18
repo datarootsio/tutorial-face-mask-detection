@@ -3,6 +3,8 @@
 # Face Mask Detection
 Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building.
 
+Our pipeline consists of two steps: first we detect all faces in an image, next we make a mask/no_mask prediction for each of them. 
+
 
 ## General Model Workflow
 ![](scripts/img/mask_detector_model_workflow.png "Model Workflow")
@@ -73,7 +75,8 @@ The mask/no mask classifier was evaluated on the faces that were correctly ident
 
 
 ## Getting Started
-Inform how to run this model on dploy.ai
+
+TODO
 
 #### Members:
 
