@@ -1,11 +1,8 @@
 [![maintained by dataroots](https://img.shields.io/badge/maintained%20by-dataroots-%2300b189)](https://dataroots.io)
 
 # Face Mask Detection
-The general outline of the model
+Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building.
 
-
-
-The purpose of this project is ________. (Describe the main goals of the project and potential civic impact. Limit to a short paragraph, 3-6 Sentences)
 
 ## General Model Workflow
 ![](scripts/img/mask_detector_model_workflow.png "Model Workflow")
@@ -19,21 +16,28 @@ The purpose of this project is ________. (Describe the main goals of the project
 * Python
 * Tensorflow
 
-
-## Project Description
-(Provide more detailed overview of the project.  Talk a bit about your data sources and what questions and hypothesis you are exploring. What specific data analysis/visualization and modelling work are you using to solve the problem? What blockers and challenges are you facing?  Feel free to number or bullet point things here)
-
 ### Data collection
-Give more details about datasets and where do we collect
+Our training data is based on the VGGFace2 dataset (http://www.robots.ox.ac.uk/~vgg/data/vgg_face2/). This dataset provides a collection of faces that are captured in the wild with different ethnicities, ages and emotions. We use 4941 images of this dataset, and apply an artificial masks to half of them. This data will be used to train our mask/no_mask classifier. 
+
+Our validation and testing data consists of images of people with and without masks that we collected from various sources that provide images with permissive licences (e.g. pexels.com, unsplash.com). We have manually annotated all faces in the collected images, and labeled them as being masked or not (using the https://www.makesense.ai/ annotation tool). We collected 273 images which contain 524 faces (many images contain multiple faces). 246 faces are masked and 278 are non-masked. These faces are split 50/50 over the validation set and test set.
 
 ### Data preprocessing
-Explain the steps that are done to generate our training set like artificial mask generation
+Labeled data of masked faces is hard to come by, which is why we decided to set the overall still limited set of real masked faces that we have collected apart for validation and testing. Artificially generated masks that are used for training are generated as follows:
+
+  1. detect the face in the image
+  2. find the face landmarks, more specifically we need the location of the nose and chin
+  3. apply an image of a mask to the face with the position based on the face landmarks
+   
+This strategy is based on the description that you can find here: https://github.com/prajnasb/observations.
+We apply 13 masks with different shapes and colors to generate training data, you can find them in data/mask-templates. Below you can see an example of an mask being artificially applied. 
+
+<img src="scripts/img/toon_masked.png" width="500">
 
 ### Face Detection
-Give more insights about [retinaface](https://github.com/peteryuX/retinaface-tf2) model. Why we used this? Refer to paper
+We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [1]. We used the implementation and pre-trained model available at https://github.com/peteryuX/retinaface-tf2). 
 
 ### Masked or Not Masked Classification
-Explain how we fine tuned the mobilenet convnet. Why we used mobilenet?
+The model that we train to distinguish between masked and non-masked cropped faces consists of a MobileNet base followed by 1 fully connected layer and a final output layer with sigmoid activation. We use ImageNet pre-trained weights for the MobileNet base, and only finetune the final 4 layers of the complete model. Only VGGFace2 non-masked an artificially masked data is used for training. We use two validation sets: one consisting of VGGFace2 non-masked and artificially masked data, and one consisting of real masked and unmasked faces from the set that we have collected ourselves. This allows us to keep track of performance on artificial and real data separately. The final test set evaluation is only performed on real data.
 
 ### Model Performance
 
@@ -80,3 +84,7 @@ Inform how to run this model on dploy.ai
 
 ## Contact
 * Dataroots contact details
+
+## References
+
+[1] Deng et al. RetinaFace: Single-stage Dense Face Localisation in the Wild. https://arxiv.org/abs/1905.00641
