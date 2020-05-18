@@ -86,17 +86,17 @@ you cannot clone submodule [retinaface-tf2](https://github.com/peteryuX/retinafa
 Extracted data folder should look like this
 ```
 data
-├── classifier_model_weights  **The pre-trained classifier model weights**
-├── mask-templates **Template mask images to artificially create masked faces**
-├── raw_images **Raw images to generate validation/test set**
-├── sampled_face_images **Sampled face images from VGGFace2 dataset**
-├── test **Test set to evaluate mask classifier model**
+├── classifier_model_weights   # The pre-trained classifier model weights
+├── mask-templates # Template mask images to artificially create masked faces
+├── raw_images # Raw images to generate validation/test set
+├── sampled_face_images # Sampled face images from VGGFace2 dataset
+├── test # Test set to evaluate mask classifier model
 │   ├── masked
 │   └── not_masked
-├── train **Train set to train mask classifier model**
+├── train # Train set to train mask classifier model
 │   ├── masked
 │   └── not_masked
-└── validation **validation set to train validation classifier model**
+└── validation # validation set to train validation classifier model
     ├── artificial
     │   ├── masked
     │   └── not_masked
@@ -111,7 +111,7 @@ data
 7. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
 8. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
 9. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-10. To deploy this repository in (dploy.ai)[http://www.dploy.ai], 
+10. To deploy this repository in (dploy.ai)[http://www.dploy.ai],
 
 ## Contact
 [Do you have any questions?](https://dataroots.io/contact)
