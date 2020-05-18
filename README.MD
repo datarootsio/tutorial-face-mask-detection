@@ -80,10 +80,10 @@ The mask/no mask classifier was evaluated on the faces that were correctly ident
 ## Getting Started
 1. To clone this repository, run `git clone --recursive https://github.com/datarootsio/face-mask-detection.git`. Note that if you don't use `--recursive` argument,
 you cannot clone submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2).
-2. Change current directory into cloned project with `cd face-mask-detection`
+2. Change current directory into cloned project by typing `cd face-mask-detection`.
 3. You need to extract `data.tar.gz`. You can either type `tar xvfz data.tar.gz` or browse to `ROOT` directory of the project and double click on `data.tar.gz` for mac users.
 
-Extracted data folder should look like this
+Extracted data folder should look like this:
 ```
 data
 ├── classifier_model_weights   # The pre-trained classifier model weights
