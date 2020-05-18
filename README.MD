@@ -111,7 +111,7 @@ data
 7. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
 8. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
 9. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-10. To deploy this repository in (dploy.ai)[http://www.dploy.ai],
+10. To deploy this repository in [dploy.ai](http://www.dploy.ai),
 
 ## Contact
 [Do you have any questions?](https://dataroots.io/contact)
