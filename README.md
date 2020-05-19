@@ -100,8 +100,7 @@ We have also evaluated the mask/no mask classifier separately based on our groun
 
 
 ## Getting Started for Pretrained Face Mask Detection Model
-This repository uses a submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2) for face recognition model. Therefore don't forget to use
-`--recursive` argument while cloning this repository. Follow the steps above to be able run the entire pipeline
+This repository uses a submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2) for face recognition model. Therefore, you need to use `--recursive` argument while cloning this repository. Follow the steps below, to run the entire pipeline.
 ```
 git clone --recursive https://github.com/datarootsio/face-mask-detection.git
 cd face-mask-detection
@@ -109,8 +108,9 @@ tar xvfz data.tar.gz
 pip install -r requirements.txt
 ```
 After completing these steps, you can run and play with the model in `scripts/predict.ipynb`
+
 ## Getting Started for Reproducing Face Mask Detection Model
-If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mandatory to run**.
+If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mandatory to run** the steps below.
   1. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
   2. To retrain the `masked or not masked classifier` model, run `scripts/train-mask-nomask.ipynb` notebook.
   3. To evaluate the performance of `RetinaFace` model, run `scripts/face-detection-evaluation.ipynb` model.
