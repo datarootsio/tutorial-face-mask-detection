@@ -107,7 +107,7 @@ cd face-mask-detection
 tar xvfz data.tar.gz
 pip install -r requirements.txt
 ```
-After completing these steps, you can run and play with the model in `scripts/predict.ipynb`
+After completing these steps, you can run and play with the model in `scripts/predict.ipynb` notebook.
 
 ## Getting Started for Reproducing Face Mask Detection Model
 If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mandatory to run** the steps below.
