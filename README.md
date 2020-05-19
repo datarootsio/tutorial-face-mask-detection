@@ -123,8 +123,3 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
 
 ## Contact
 [Do you have any questions?](https://dataroots.io/contact)
-
-## TODO
-
-- Refactoring/cleaning train_mask_nomask.ipynb
-- Generating ROC curve for overall pipeline
