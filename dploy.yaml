@@ -5,6 +5,6 @@ spec_version: "0.1"
 spec:
   environment:
     base: python:3.7
-    entrypoint: scripts/predict.py
+    entrypoint: scripts/predict.ipynb
     requirements: ["requirements.txt"]
   replicas: 1
