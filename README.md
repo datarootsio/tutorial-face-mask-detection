@@ -38,6 +38,7 @@ We apply 13 masks with different shapes and colors to generate training data, wh
 ```
 data
 ├── classifier_model_weights   # The pre-trained classifier model weights
+├── fonts  # Font directory to annotate and label the input image
 ├── mask-templates # Template mask images to artificially create masked faces
 ├── raw_images # Raw images to generate validation/test set
 ├── sampled_face_images # Sampled face images from VGGFace2 dataset
