@@ -15,3 +15,5 @@ scripts/evaluate_pipeline.ipynb
 scripts/face_detection_evaluation.ipynb
 scripts/prep-data.ipynb
 scripts/train-mask-nomask.ipynb
+retinaface-tf2/modules/__pycache__
+.DS_Store
