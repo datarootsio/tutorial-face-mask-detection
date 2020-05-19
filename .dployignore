@@ -12,6 +12,8 @@ data/validation
 data/test_validation_metadata.csv
 vggface2
 scripts/evaluate_pipeline.ipynb
-scripts/face_detection.ipynb
+scripts/face_detection_evaluation.ipynb
 scripts/prep-data.ipynb
 scripts/train-mask-nomask.ipynb
+retinaface-tf2/modules/__pycache__
+.DS_Store
