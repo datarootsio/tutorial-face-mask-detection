@@ -1,5 +1,7 @@
 [![maintained by dataroots](https://img.shields.io/badge/maintained%20by-dataroots-%2300b189)](https://dataroots.io)
-
+<div align="center">
+  <img src="scripts/img/dataroots.png">
+</div>
 # Face Mask Detection
 Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building.
 
@@ -14,8 +16,8 @@ Our pipeline consists of three steps:
 
 
 ### Technologies
-* Python
-* Tensorflow/keras
+* Python 3.7
+* Tensorflow2 / Keras
 
 ### Data collection
 Our training data is based on the [VGGFace2 dataset](http://www.robots.ox.ac.uk/~vgg/data/vgg_face2/). This dataset provides a collection of faces that are captured in the wild with different ethnicities, ages and emotions. We use 4941 images of this dataset, and apply an artificial masks to half of them. This data will be used to train our mask/no_mask classifier.
@@ -33,6 +35,28 @@ This strategy is based on the description that you can find in the [prajnasb/obs
 We apply 13 masks with different shapes and colors to generate training data, which you can find in [data/mask-templates](data/mask-templates). Below you can see an example of a mask being artificially applied.
 
 <img src="scripts/img/toon_masked.png" width="500">
+
+### Data Folder Structure
+```
+data
+├── classifier_model_weights   # The pre-trained classifier model weights
+├── mask-templates # Template mask images to artificially create masked faces
+├── raw_images # Raw images to generate validation/test set
+├── sampled_face_images # Sampled face images from VGGFace2 dataset
+├── test # Test set to evaluate mask classifier model
+│   ├── masked
+│   └── not_masked
+├── train # Train set to train mask classifier model
+│   ├── masked
+│   └── not_masked
+└── validation # validation set to train validation classifier model
+    ├── artificial
+    │   ├── masked
+    │   └── not_masked
+    └── real
+        ├── masked
+        └── not_masked
+```
 
 ### Face Detection
 We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [retinaface-tf2 repository](https://github.com/peteryuX/retinaface-tf2).
@@ -79,41 +103,27 @@ We have also evaluated the mask/no mask classifier separately based on our groun
 ![](scripts/img/roc_classification.png "ROC curve")
 
 
-## Getting Started
-1. To clone this repository, run `git clone --recursive https://github.com/datarootsio/face-mask-detection.git`. Note that if you don't use `--recursive` argument,
-you cannot clone submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2).
-2. Change current directory into cloned project by typing `cd face-mask-detection`.
-3. You need to extract `data.tar.gz`. You can either type `tar xvfz data.tar.gz` or browse to `ROOT` directory of the project and double click on `data.tar.gz` for mac users.
-
-Extracted data folder should look like this:
+## Getting Started for Pretrained Face Mask Detection Model
+This repository uses a submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2) for face recognition model. Therefore don't forget to use
+`--recursive` argument while cloning this repository. Follow the steps above to be able run the entire pipeline
 ```
-data
-├── classifier_model_weights   # The pre-trained classifier model weights
-├── mask-templates # Template mask images to artificially create masked faces
-├── raw_images # Raw images to generate validation/test set
-├── sampled_face_images # Sampled face images from VGGFace2 dataset
-├── test # Test set to evaluate mask classifier model
-│   ├── masked
-│   └── not_masked
-├── train # Train set to train mask classifier model
-│   ├── masked
-│   └── not_masked
-└── validation # validation set to train validation classifier model
-    ├── artificial
-    │   ├── masked
-    │   └── not_masked
-    └── real
-        ├── masked
-        └── not_masked
+git clone --recursive https://github.com/datarootsio/face-mask-detection.git
+cd face-mask-detection
+tar xvfz data.tar.gz
+pip install -r requirements.txt
 ```
+After completing these steps, you can run and play with the model in `scripts/predict.ipynb`
 
-4. If you don't want to reproduce this repository and want to use pretrained weights go to step 9.
-5. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
-6. To retrain the `masked or not masked classifier` model, run `scripts/train_mask_nomask.ipynb` notebook.
-7. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
-8. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
-9. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-10. To deploy this repository in [dploy.ai](http://www.dploy.ai),
+## Getting Started for Reproducing Face Mask Detection Model
+If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mendatory to run**.
+
+  1. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
+  2. To retrain the `masked or not masked classifier` model, run `scripts/train_mask_nomask.ipynb` notebook.
+  3. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
+  4. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
+  5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
+
+## Getting Started for Calling Deployed Face Mask Detection Model in 
 
 ## Contact
 [Do you have any questions?](https://dataroots.io/contact)
