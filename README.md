@@ -71,7 +71,7 @@ This allows us to keep track of performance on artificial and real data separate
 
 #### Overall evaluation
 
-Our test set of 135 images contains 266 faces, of which 148 are unmasked.
+Our test set of 135 images contains 249 faces, of which 130 are unmasked.
 
 The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We apply the mask/no_mask classifier to the cropped faces extracted by the face detector, and compare the resulting labels to the ground-truth labels of matching ground-truth face bounding boxes. A predicted face bounding box matches a ground truth bounding box if their intersection over union (IoU) > 0.5.
 
@@ -79,14 +79,13 @@ The following table summarizes the performance of the complete pipeline (i.e. th
 
 |    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
 |----------|:-------------:|------:| ------:|------:|
-| masked faces |  118 |  104 | 11 | 3 |
-| unmasked faces |    148   |   132 | 8 | 8  |
+| masked faces |  119 |  95 | 14 | 10 |
+| unmasked faces |    130   |   115 | 7 | 8  |
 
 
-The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 132 of the 148 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 89.2%**. 11 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 9.3%**. The pipeline also incorrectly identified 9 faces that did not match any face in the ground truth, 4 of them were subsequently classified as non-masked and 1 as masked.
+The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 115 of the 130 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 88.5%**. 14 of the 119 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 11.8%**. The pipeline also incorrectly identified 15 faces that did not match any face in the ground truth, 7 of them were subsequently classified as non-masked and 1 as masked.
 
 While the previous statistics correspond to a mask/no_mask classification threshold at 0.5, we can of course vary this to trade off between better TNR or FNR. The following figure shows the ROC curve for the pipeline. For the generation of this ROC curve, we considered ground truth faces that were not detected by the face detector to be predicted as masked. After all, the aim is to detect unmasked faces so if the detector is not detecting any face it will have the same effect as predicting masked. Faces that are detected by the face detector but that don't exist in the ground truth were not taken into account in this ROC curve. 
-
 ![](scripts/img/roc_complete.png "ROC curve")
 
 #### Evaluation of the face detector
