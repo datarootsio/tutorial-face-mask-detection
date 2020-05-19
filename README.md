@@ -119,4 +119,6 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
 ## Getting Started for Calling Deployed Face Mask Detection Model in 
 
 ## Contact
-[Do you have any questions?](https://dataroots.io/contact)
+Ping us:
+- toon@dataroots.io
+- baturay@dataroots.io
