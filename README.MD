@@ -112,14 +112,16 @@ pip install -r requirements.txt
 ```
 After completing these steps, you can run and play with the model in `scripts/predict.ipynb`
 
-## Getting Started for Reproduce Face Mask Detection Model
-If you do not want to recreate the `data` folder and retrain `masked or not masked` classifier model, you can skip this section.
-5. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
-6. To retrain the `masked or not masked classifier` model, run `scripts/train_mask_nomask.ipynb` notebook.
-7. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
-8. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
-9. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-10. To deploy this repository in [dploy.ai](http://www.dploy.ai),
+## Getting Started for Reproducing Face Mask Detection Model
+If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mendatory to run**.
+
+  1. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
+  2. To retrain the `masked or not masked classifier` model, run `scripts/train_mask_nomask.ipynb` notebook.
+  3. To evaluate the trained model and get overall performance of mask detection algorithm, run `scripts/evaluate_pipeline.ipynb` notebook.
+  4. To evaluate the performance of `RetinaFace` model, run `scripts/face_detection.ipynb` model.
+  5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
+
+## Getting Started for Calling Deployed Face Mask Detection Model in 
 
 ## Contact
 [Do you have any questions?](https://dataroots.io/contact)

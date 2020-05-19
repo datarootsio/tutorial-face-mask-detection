@@ -1,0 +1,17 @@
+data.tar.gz
+.git/*
+.idea
+.ipynb_checkpoints
+data/sampled_face_images
+data/mask-templates
+data/raw_images
+data/sampled_face_images
+data/test
+data/train
+data/validation
+data/test_validation_metadata.csv
+vggface2
+scripts/evaluate_pipeline.ipynb
+scripts/face_detection.ipynb
+scripts/prep-data.ipynb
+scripts/train-mask-nomask.ipynb
