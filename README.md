@@ -115,9 +115,9 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
   1. To reproduce `train/validation/test sets` from scratch, run `scripts/prep-data.ipynb` notebook.
   2. To retrain the `masked or not masked classifier` model, run `scripts/train-mask-nomask.ipynb` notebook.
   3. To evaluate the performance of `RetinaFace` model, run `scripts/face-detection-evaluation.ipynb` model.
-  4. To evaluate the complete pipeline, run `scgit ripts/pipeline-evaluation.ipynb` notebook. Note that this requires that you have previously run `scripts/face-detection-evaluation.ipynb`, as it relies on the cropped faces produced by the face detector that are produced there.
+  4. To evaluate the complete pipeline, run `scripts/pipeline-evaluation.ipynb` notebook. Note that this requires that you have previously run `scripts/face-detection-evaluation.ipynb`, as it relies on the cropped faces produced by the face detector that are produced there.
   5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-
+  
 ## Getting Started for Calling Deployed Face Mask Detection Model
 The model has been deployed in [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response.
 
