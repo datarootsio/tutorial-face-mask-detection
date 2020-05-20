@@ -1,4 +1,4 @@
-model_id: 18b7ca8f-db02-4be8-9706-73101bd9f760
+model_id: f8e187b4-d83a-4481-9850-42f1292b3290
 description: |
   Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building.
 spec_version: "0.1"
