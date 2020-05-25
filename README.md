@@ -58,7 +58,7 @@ data
 ```
 
 ### Face Detection
-We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [retinaface-tf2 repository](https://github.com/peteryuX/retinaface-tf2).
+We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [RetinaFace repository](https://github.com/hukkelas/DSFD-Pytorch-Inference). Note that we used the RetinaNetMobileNetV1 model, which is much faster than RetinaNetResNet50 and DSFDDetector. 
 
 ### Masked or Not Masked Classification
 The model that we train to distinguish between masked and non-masked cropped faces consists of a MobileNetV1 base followed by 1 fully connected layer and a final output layer with sigmoid activation. We use ImageNet pre-trained weights for the MobileNetV1 base, and only finetune the final 4 layers of the complete model. Only VGGFace2 non-masked and artificially masked data is used for training. We use two validation sets:
@@ -71,7 +71,7 @@ This allows us to keep track of performance on artificial and real data separate
 
 #### Overall evaluation
 
-Our test set of 135 images contains 254 faces, of which 136 are unmasked.
+Our test set of 135 images contains 251 faces, of which 136 are unmasked.
 
 The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We apply the mask/no_mask classifier to the cropped faces extracted by the face detector, and compare the resulting labels to the ground-truth labels of matching ground-truth face bounding boxes. A predicted face bounding box matches a ground truth bounding box if their intersection over union (IoU) > 0.5.
 
@@ -79,11 +79,11 @@ The following table summarizes the performance of the complete pipeline (i.e. th
 
 |    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
 |----------|:-------------:|------:| ------:|------:|
-| masked faces |  118 |  106 | 8 | 4 |
-| unmasked faces |    136   |   117 | 12 | 7  |
+| masked faces |  115 |  105 | 5 | 5 |
+| unmasked faces |    136   |   118 | 9 | 9  |
 
 
-The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 117 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 86%**. 8 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 7%**. Note that faces that were not identified by the detector are not taken into account in these numbers. The pipeline also incorrectly identified 13 faces that did not match any face in the ground truth.
+The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 118 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 87%**. 5 of the 115 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 4%**. Note that faces that were not identified by the detector are not taken into account in these numbers. The pipeline also incorrectly identified 19 faces that did not match any face in the ground truth.
 
 While the previous statistics correspond to a mask/no_mask classification threshold at 0.5, we can of course vary this to trade off between better TNR or FNR. The following figure shows the ROC curve for the pipeline. For the generation of this ROC curve, we considered ground truth faces that were not detected by the face detector to be predicted as masked. After all, the aim is to detect unmasked faces: if the detector is not detecting a face it will have the same effect as predicting a masked face for most practical purposes. Faces that are detected by the face detector but that don't exist in the ground truth were not taken into account in this ROC curve. 
 
@@ -91,7 +91,7 @@ While the previous statistics correspond to a mask/no_mask classification thresh
 
 #### Evaluation of the face detector
 
-The face detector correctly identifies 96% of the ground truth faces in the test set (i.e. for 243 out of 254 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 11 faces in the ground truth that it does not detect, 4 are masked and 7 are not masked. The face detector also outputs 13 bounding boxes for the test set that do not correspond to faces, 6 of which were subsequently classified as non masked.
+The face detector correctly identifies 94% of the ground truth faces in the test set (i.e. for 237 out of 251 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 14 faces in the ground truth that it does not detect, 5 are masked and 9 are not masked. The face detector also outputs 13 bounding boxes for the test set that do not correspond to faces, 6 of which were subsequently classified as non masked.
 
 #### Evaluation of the mask/no mask classifier
 
@@ -101,9 +101,9 @@ We have also evaluated the mask/no mask classifier separately based on our groun
 
 
 ## Getting Started for Pretrained Face Mask Detection Model
-This repository uses a submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2) for face recognition model. Therefore, you need to use `--recursive` argument while cloning this repository. Follow the steps below, to run the entire pipeline.
+Follow the steps below, to run the entire pipeline.
 ```
-git clone --recursive https://github.com/datarootsio/face-mask-detection.git
+git clone https://github.com/datarootsio/face-mask-detection.git
 cd face-mask-detection
 tar xvfz data.tar.gz
 pip install -r requirements.txt
@@ -119,9 +119,32 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
   5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
   
 ## Getting Started for Calling Deployed Face Mask Detection Model
-The model has been deployed in [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response.
+The model has been deployed in the [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response. For more details about REST call, please visit [this link at dploy.ai](https://app.dploy.ai/modelhub/Face-Mask-Detection-l3wuutl988s).
 
-For more details about REST call, please visit this link <(ADD DPLOY.AI) LINK>
+The input should have the following format:
+
+```
+{
+ image: <Base64 Image String>,
+ type: <Image Type e.g. jpg, jpeg, png>
+}
+```
+The response will have the following format: 
+```
+{
+    'detected_face_coordinates': <the bounding box coordinates of the detected faces e.g. 
+                                 [[x1, y1, x2, y2], [x1, y1, x2, y2]]>,
+    'detected_mask_scores': <the prediction score of the detected faces between 0 and 1 e.g.
+                            ["0.8", "0.99", "0.001"]>,
+    'detected_face_labels': <human readible classification results of the detected faces e.g.
+                            [masked, masked, not masked]>,
+    'annotated_image': <annotated base64 image that visualizes the prediction results with  
+                       bounding boxes and text labels>,
+    'image_type': <Image Type e.g. jpg, jpeg, png>
+}
+```
+ 
+
 
 ## Contact
 Ping us:
