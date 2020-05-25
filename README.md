@@ -43,15 +43,15 @@ data
 ├── raw_images # Raw images to generate validation/test set
 ├── sampled_face_images # Sampled face images from VGGFace2 dataset
 ├── test # Test set to evaluate mask classifier model
-│   ├── masked
-│   └── not_masked
+│   ├── masked
+│   └── not_masked
 ├── train # Train set to train mask classifier model
-│   ├── masked
-│   └── not_masked
+│   ├── masked
+│   └── not_masked
 └── validation # validation set to train validation classifier model
     ├── artificial
-    │   ├── masked
-    │   └── not_masked
+    │   ├── masked
+    │   └── not_masked
     └── real
         ├── masked
         └── not_masked
@@ -108,7 +108,7 @@ cd face-mask-detection
 tar xvfz data.tar.gz
 pip install -r requirements.txt
 ```
-After completing these steps, you can run and play with the model in `scripts/predict.ipynb`
+After completing these steps, you can run and play with the model in `scripts/predict.ipynb` notebook.
 
 ## Getting Started for Reproducing Face Mask Detection Model
 If you want to recreate the `data` folder and retrain `masked or not masked` classifier model, refer this section, otherwise it is **not mandatory to run** the steps below.
@@ -117,7 +117,13 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
   3. To evaluate the performance of `RetinaFace` model, run `scripts/face-detection-evaluation.ipynb` model.
   4. To evaluate the complete pipeline, run `scripts/pipeline-evaluation.ipynb` notebook. Note that this requires that you have previously run `scripts/face-detection-evaluation.ipynb`, as it relies on the cropped faces produced by the face detector that are produced there.
   5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-## Getting Started for Calling Deployed Face Mask Detection Model in 
+  
+## Getting Started for Calling Deployed Face Mask Detection Model
+The model has been deployed in [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response.
+
+For more details about REST call, please visit this link <(ADD DPLOY.AI) LINK>
 
 ## Contact
-[Do you have any questions?](https://dataroots.io/contact)
+Ping us:
+- toon@dataroots.io
+- baturay@dataroots.io
