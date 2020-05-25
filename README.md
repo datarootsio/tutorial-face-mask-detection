@@ -119,9 +119,32 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
   5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
   
 ## Getting Started for Calling Deployed Face Mask Detection Model
-The model has been deployed in [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response.
+The model has been deployed in the [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response. For more details about REST call, please visit [this link at dploy.ai](https://app.dploy.ai/modelhub/Face-Mask-Detection-l3wuutl988s).
 
-For more details about REST call, please visit this link <(ADD DPLOY.AI) LINK>
+The input should have the following format:
+
+```
+{
+ image: <Base64 Image String>,
+ type: <Image Type e.g. jpg, jpeg, png>
+}
+```
+The response will have the following format: 
+```
+{
+    'detected_face_coordinates': <the bounding box coordinates of the detected faces e.g. 
+                                 [[x1, y1, x2, y2], [x1, y1, x2, y2]]>,
+    'detected_mask_scores': <the prediction score of the detected faces between 0 and 1 e.g.
+                            ["0.8", "0.99", "0.001"]>,
+    'detected_face_labels': <human readible classification results of the detected faces e.g.
+                            [masked, masked, not masked]>,
+    'annotated_image': <annotated base64 image that visualizes the prediction results with  
+                       bounding boxes and text labels>,
+    'image_type': <Image Type e.g. jpg, jpeg, png>
+}
+```
+ 
+
 
 ## Contact
 Ping us:
