@@ -9,6 +9,7 @@ data/sampled_face_images
 data/test
 data/train
 data/validation
+data/overall_model_evaluation
 data/test_validation_metadata.csv
 vggface2
 scripts/pipeline-evaluation.ipynb
