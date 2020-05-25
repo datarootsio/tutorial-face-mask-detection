@@ -71,7 +71,7 @@ This allows us to keep track of performance on artificial and real data separate
 
 #### Overall evaluation
 
-Our test set of 135 images contains 254 faces, of which 136 are unmasked.
+Our test set of 135 images contains 251 faces, of which 136 are unmasked.
 
 The following table summarizes the performance of the complete pipeline (i.e. the face detector followed by the classifier). We apply the mask/no_mask classifier to the cropped faces extracted by the face detector, and compare the resulting labels to the ground-truth labels of matching ground-truth face bounding boxes. A predicted face bounding box matches a ground truth bounding box if their intersection over union (IoU) > 0.5.
 
@@ -79,11 +79,11 @@ The following table summarizes the performance of the complete pipeline (i.e. th
 
 |    |      ground truth      |  identified and classified correctly | identified but classified wrongly | not identified by detector |
 |----------|:-------------:|------:| ------:|------:|
-| masked faces |  118 |  106 | 8 | 4 |
-| unmasked faces |    136   |   117 | 12 | 7  |
+| masked faces |  115 |  105 | 5 | 5 |
+| unmasked faces |    136   |   118 | 9 | 9  |
 
 
-The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 117 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 86%**. 8 of the 118 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 7%**. Note that faces that were not identified by the detector are not taken into account in these numbers. The pipeline also incorrectly identified 13 faces that did not match any face in the ground truth.
+The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 118 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 87%**. 5 of the 115 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 4%**. Note that faces that were not identified by the detector are not taken into account in these numbers. The pipeline also incorrectly identified 19 faces that did not match any face in the ground truth.
 
 While the previous statistics correspond to a mask/no_mask classification threshold at 0.5, we can of course vary this to trade off between better TNR or FNR. The following figure shows the ROC curve for the pipeline. For the generation of this ROC curve, we considered ground truth faces that were not detected by the face detector to be predicted as masked. After all, the aim is to detect unmasked faces: if the detector is not detecting a face it will have the same effect as predicting a masked face for most practical purposes. Faces that are detected by the face detector but that don't exist in the ground truth were not taken into account in this ROC curve. 
 
@@ -91,7 +91,7 @@ While the previous statistics correspond to a mask/no_mask classification thresh
 
 #### Evaluation of the face detector
 
-The face detector correctly identifies 96% of the ground truth faces in the test set (i.e. for 243 out of 254 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 11 faces in the ground truth that it does not detect, 4 are masked and 7 are not masked. The face detector also outputs 13 bounding boxes for the test set that do not correspond to faces, 6 of which were subsequently classified as non masked.
+The face detector correctly identifies 94% of the ground truth faces in the test set (i.e. for 237 out of 251 ground truth bounding boxes there is a predicted bounding box with an IoU > 0.5). Of the 14 faces in the ground truth that it does not detect, 5 are masked and 9 are not masked. The face detector also outputs 13 bounding boxes for the test set that do not correspond to faces, 6 of which were subsequently classified as non masked.
 
 #### Evaluation of the mask/no mask classifier
 
