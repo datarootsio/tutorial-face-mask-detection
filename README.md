@@ -58,7 +58,7 @@ data
 ```
 
 ### Face Detection
-We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [retinaface-tf2 repository](https://github.com/peteryuX/retinaface-tf2).
+We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [RetinaFace repository](https://github.com/hukkelas/DSFD-Pytorch-Inference). Note that we used the RetinaNetMobileNetV1 model, which is much faster than RetinaNetResNet50 and DSFDDetector. 
 
 ### Masked or Not Masked Classification
 The model that we train to distinguish between masked and non-masked cropped faces consists of a MobileNetV1 base followed by 1 fully connected layer and a final output layer with sigmoid activation. We use ImageNet pre-trained weights for the MobileNetV1 base, and only finetune the final 4 layers of the complete model. Only VGGFace2 non-masked and artificially masked data is used for training. We use two validation sets:
@@ -101,9 +101,9 @@ We have also evaluated the mask/no mask classifier separately based on our groun
 
 
 ## Getting Started for Pretrained Face Mask Detection Model
-This repository uses a submodule [retinaface-tf2](https://github.com/peteryuX/retinaface-tf2) for face recognition model. Therefore, you need to use `--recursive` argument while cloning this repository. Follow the steps below, to run the entire pipeline.
+Follow the steps below, to run the entire pipeline.
 ```
-git clone --recursive https://github.com/datarootsio/face-mask-detection.git
+git clone https://github.com/datarootsio/face-mask-detection.git
 cd face-mask-detection
 tar xvfz data.tar.gz
 pip install -r requirements.txt
