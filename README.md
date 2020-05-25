@@ -1,7 +1,9 @@
 [![maintained by dataroots](https://img.shields.io/badge/maintained%20by-dataroots-%2300b189)](https://dataroots.io)
  ![](scripts/img/dataroots.png "Logo")
 # Face Mask Detection
-Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations. In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear a mask when entering a building.
+Face masks are crucial in minimizing the propagation of Covid-19, and are highly recommended or even obligatory in many situations.
+ In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear
+ a mask when entering a building.
 
 Our pipeline consists of three steps:
   1. We detect all human faces in an image
