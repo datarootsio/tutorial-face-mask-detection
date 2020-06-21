@@ -5,6 +5,9 @@ Face masks are crucial in minimizing the propagation of Covid-19, and are highly
  In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear
  a mask when entering a building.
 
+ We also record a [YouTube video](https://youtu.be/E8W2AOQOh-k) to explain the
+ general pipeline of this project.
+
 Our pipeline consists of three steps:
   1. We detect all human faces in an image
   2. We make a mask/no_mask prediction for each of them
@@ -60,7 +63,7 @@ data
 ```
 
 ### Face Detection
-We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [RetinaFace repository](https://github.com/hukkelas/DSFD-Pytorch-Inference). Note that we used the RetinaNetMobileNetV1 model, which is much faster than RetinaNetResNet50 and DSFDDetector. 
+We used the RetinaFace face detector to extract faces as it is the state-of-the-art in face localisation in the wild, and works in real-time on a single CPU core [(Deng et al.)](https://arxiv.org/abs/1905.00641). We used the implementation and pre-trained model available at the [RetinaFace repository](https://github.com/hukkelas/DSFD-Pytorch-Inference). Note that we used the RetinaNetMobileNetV1 model, which is much faster than RetinaNetResNet50 and DSFDDetector.
 
 ### Masked or Not Masked Classification
 The model that we train to distinguish between masked and non-masked cropped faces consists of a MobileNetV1 base followed by 1 fully connected layer and a final output layer with sigmoid activation. We use ImageNet pre-trained weights for the MobileNetV1 base, and only finetune the final 4 layers of the complete model. Only VGGFace2 non-masked and artificially masked data is used for training. We use two validation sets:
@@ -87,7 +90,7 @@ The following table summarizes the performance of the complete pipeline (i.e. th
 
 The two most relevant metrics are the true negative rate (TNR) and the false negative rate (FNR). The first one tells us how many of the unmasked faces we detect, and the second one how many times we incorrectly identify an unmasked face. 118 of the 136 unmasked faces were identified correctly, resulting in a **true negative rate (TNR) of 87%**. 5 of the 115 masked faces were incorrectly identified as unmasked, resulting in a **false negative rate (FNR) of 4%**. Note that faces that were not identified by the detector are not taken into account in these numbers. The pipeline also incorrectly identified 19 faces that did not match any face in the ground truth.
 
-While the previous statistics correspond to a mask/no_mask classification threshold at 0.5, we can of course vary this to trade off between better TNR or FNR. The following figure shows the ROC curve for the pipeline. For the generation of this ROC curve, we considered ground truth faces that were not detected by the face detector to be predicted as masked. After all, the aim is to detect unmasked faces: if the detector is not detecting a face it will have the same effect as predicting a masked face for most practical purposes. Faces that are detected by the face detector but that don't exist in the ground truth were not taken into account in this ROC curve. 
+While the previous statistics correspond to a mask/no_mask classification threshold at 0.5, we can of course vary this to trade off between better TNR or FNR. The following figure shows the ROC curve for the pipeline. For the generation of this ROC curve, we considered ground truth faces that were not detected by the face detector to be predicted as masked. After all, the aim is to detect unmasked faces: if the detector is not detecting a face it will have the same effect as predicting a masked face for most practical purposes. Faces that are detected by the face detector but that don't exist in the ground truth were not taken into account in this ROC curve.
 
 ![](scripts/img/roc_complete.png "ROC curve")
 
@@ -119,7 +122,7 @@ If you want to recreate the `data` folder and retrain `masked or not masked` cla
   3. To evaluate the performance of `RetinaFace` model, run `scripts/face-detection-evaluation.ipynb` model.
   4. To evaluate the complete pipeline, run `scripts/pipeline-evaluation.ipynb` notebook. Note that this requires that you have previously run `scripts/face-detection-evaluation.ipynb`, as it relies on the cropped faces produced by the face detector that are produced there.
   5. Run `predict.ipynb` to run entire pipeline and see an example output of face mask detection model.
-  
+
 ## Getting Started for Calling Deployed Face Mask Detection Model
 The model has been deployed in the [dploy.ai](dploy.ai) platform. By making a REST call, you can provide your image and get the prediction response. For more details about REST call, please visit [this link at dploy.ai](https://app.dploy.ai/modelhub/Face-Mask-Detection-l3wuutl988s).
 
@@ -131,10 +134,10 @@ The input should have the following format:
  type: <Image Type e.g. jpg, jpeg, png>
 }
 ```
-The response will have the following format: 
+The response will have the following format:
 ```
 {
-    'detected_face_coordinates': <the bounding box coordinates of the detected faces e.g. 
+    'detected_face_coordinates': <the bounding box coordinates of the detected faces e.g.
                                  [[x1, y1, x2, y2], [x1, y1, x2, y2]]>,
     'detected_mask_scores': <the prediction score of the detected faces between 0 and 1 e.g.
                             ["0.8", "0.99", "0.001"]>,
@@ -145,7 +148,7 @@ The response will have the following format:
     'image_type': <Image Type e.g. jpg, jpeg, png>
 }
 ```
- 
+
 
 
 ## Contact
