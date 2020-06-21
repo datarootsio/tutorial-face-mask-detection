@@ -5,7 +5,7 @@ Face masks are crucial in minimizing the propagation of Covid-19, and are highly
  In this project, we develop a pipeline to detect unmasked faces in images. This can, for example, be used to alert people that do not wear
  a mask when entering a building.
 
- We also record a [YouTube video](https://youtu.be/E8W2AOQOh-k) to explain the
+ We recorded a [YouTube video](https://youtu.be/E8W2AOQOh-k) to explain the
  general pipeline of this project.
 
 Our pipeline consists of three steps:
