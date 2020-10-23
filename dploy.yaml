@@ -1,29 +1,8 @@
 model_id: d36795f9-0376-4a4a-bc05-0fb964ee229b
-description: |
-  Face masks are crucial in minimizing the propagation of COVID-19, and are highly recommended or even obligatory in many situations.
-
-  This deployed model gives access to dataroots' [open-sourced](https://github.com/datarootsio/face-mask-detection) face mask detection project.
-
-  You can interactively test the model below. Or you can use the model via through our API with the following steps:
-
-  1. Subscribe to this model
-  2. Copy your user-id and api-key tokens
-  3. Perform the following request
-
-  ```sh
-  curl --request POST \
-    --url https://${modelversion_id}.users.dploy.ai/ \
-    --header 'content-type: application/json' \
-    --header 'x-api-key: <insert your api key>' \
-    --header 'x-api-user: <insert your api id>' \
-    --data '{"image": "<insert your base64string>", "type": "png"}'
-  ```
-  For an example of how to use this within your application, check out our [examples](https://github.com/dploy-ai/dploy-examples)
-spec_version: "0.1"
+spec_version: v2
 spec:
   environment:
     base: python:3.7
     entrypoint: scripts/predict.ipynb
     requirements: ["requirements.txt"]
   replicas: 1
-  max_replicas: 5
