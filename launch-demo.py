@@ -27,8 +27,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 # Might affect quality of the prediction, it will be scaled for faster processing
 INTERMEDIATE_WIDTH = 200
-MASKED_COLOR = '#00b189'
-NOT_MASKED_COLOR = '#365abd'
+MASKED_COLOR = (137, 177, 0)
+NOT_MASKED_COLOR = (189, 90, 54)
 
 ROOT_DIR = os.path.dirname(os.path.abspath(os.curdir))
 FONT_TTF_LOC = str(Path(ROOT_DIR) / 'face-mask-detection' / 'data' / 'fonts' / 'Arvo-Regular.ttf')
@@ -146,6 +146,7 @@ def show_webcam(mirror, intermediate_width):
             img = cv2.flip(img, 1)
         # Convert to PIL
         img_raw = Image.fromarray(img, 'RGB')
+
         response = predict_masked_faces(img_raw, intermediate_width)
         # annotated_image = response['annotated_image']
         wpercent = (float(img_raw.size[0]) / intermediate_width)
