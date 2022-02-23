@@ -17,6 +17,7 @@ import numpy
 import numpy as np
 # masked or not masked classification
 import tensorflow as tf
+import typer
 from PIL import Image, ImageDraw, ImageFont
 
 # visualising the data
@@ -114,9 +115,9 @@ def convert_pil_to_base64(annotated_image, image_type):
     return annotated_image_base64.decode('utf-8')
 
 
-def predict_masked_faces(image):
+def predict_masked_faces(image, intermediate_width):
     # Resize image for performance
-    resized_img = resize_image(image, INTERMEDIATE_WIDTH)
+    resized_img = resize_image(image, intermediate_width)
 
     # Detect face coordinates from the raw image
     face_coords = detect_face(resized_img)
@@ -137,7 +138,7 @@ def predict_masked_faces(image):
     }
 
 
-def show_webcam(mirror=False):
+def show_webcam(mirror, intermediate_width):
     cam = cv2.VideoCapture(0)
     while True:
         ret_val, img = cam.read()
@@ -147,7 +148,7 @@ def show_webcam(mirror=False):
         img_raw = Image.fromarray(img, 'RGB')
         response = predict_masked_faces(img_raw)
         # annotated_image = response['annotated_image']
-        wpercent = (float(img_raw.size[0]) / INTERMEDIATE_WIDTH)
+        wpercent = (float(img_raw.size[0]) / intermediate_width)
         annotated_image = annotate_image(
             img_raw,
             response["detected_face_coordinates"] * wpercent,
@@ -161,9 +162,9 @@ def show_webcam(mirror=False):
     cv2.destroyAllWindows()
 
 
-def main():
-    show_webcam(mirror=True)
+def main(mirror: bool = False, intermediate_width: int = 200):
+    show_webcam(mirror=mirror, intermediate_width=intermediate_width)
 
 
 if __name__ == '__main__':
-    main()
+    typer.run(main)
