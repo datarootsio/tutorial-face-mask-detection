@@ -146,7 +146,7 @@ def show_webcam(mirror, intermediate_width):
             img = cv2.flip(img, 1)
         # Convert to PIL
         img_raw = Image.fromarray(img, 'RGB')
-        response = predict_masked_faces(img_raw)
+        response = predict_masked_faces(img_raw, intermediate_width)
         # annotated_image = response['annotated_image']
         wpercent = (float(img_raw.size[0]) / intermediate_width)
         annotated_image = annotate_image(
